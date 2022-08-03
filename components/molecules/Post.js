@@ -4,6 +4,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
 let imageUrl = 'https://img.redbull.com/images/c_crop,x_1322,y_0,h_3333,w_2666/c_fill,w_790,h_878/q_auto:low,f_auto/redbullcom/2022/4/25/l3emaoz6htq6co5i9upr/best-of-surf-2021-art';
+
 const Post = () => {
   return (
     <View style={s.mainContainer}>
@@ -51,12 +52,10 @@ export default Post;
 
 const s = StyleSheet.create({
   mainContainer: {
-    marginTop: 200,
-    height: '100%',
-    width: '100%',
+    flex: 1,
   },
   container: {
-    height: '52%',
+    height: 450,
     width: '100%',
     justifyContent: 'space-between',
   },
@@ -75,8 +74,8 @@ const s = StyleSheet.create({
     flex: 1,
   },
   userImageWrapper: {
-    height: '80%',
-    width: '11%',
+    height: 40,
+    width: 40,
     marginRight: 10,
     marginLeft: 15,
     padding: 2,
