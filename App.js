@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ActivityIndicator, View } from 'react-native';
-import Post from './components/molecules/Post';
 import {
   useFonts,
   Inter_400Regular as regular,
@@ -9,17 +7,19 @@ import {
   Inter_700Bold as bold,
   Inter_900Black as black,
 } from '@expo-google-fonts/inter';
-import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Octicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import './cofig/firebase';
+import SignUp from './screens/SignScreens/SignUp';
+import SignIn from './screens/SignScreens/SignIn';
+import BottomStack from './screens/navigation/BottomStack';
+import { useAuthentication } from './utils/hooks/useAuthentication';
+import { SignStack } from './screens/navigation/stackNavigators/Stacks';
+import { NavigationContainer } from '@react-navigation/native';
 
-const BottomTab = createBottomTabNavigator();
 
 export default function App() {
+
+  const { user } = useAuthentication();
 
   let [fontsLoaded] = useFonts({
     regular,
@@ -36,19 +36,15 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <BottomTab.Navigator screenOptions={{headerShown: true,  tabBarShowLabel: false, tabBarStyle: {backgroundColor: 'white', elevation: -10} }}>
-          <BottomTab.Screen name="HomeScreen" options={{tabBarIcon: () => (<Octicons name="home" size={24} color="black" />)}} component={Post}/>
-          <BottomTab.Screen name="Search" options={{tabBarIcon: () => (<Octicons name="search" size={24} color="black" />)}} component={Post}/>
-          <BottomTab.Screen name="Reels" options={{tabBarIcon: () => (<MaterialCommunityIcons name="movie-play-outline" size={24} color="black" />)}} component={Post}/>
-          <BottomTab.Screen name="Store" options={{tabBarIcon: () => (<Feather name="shopping-bag" size={24} color="black" />)}} component={Post}/>
-          <BottomTab.Screen name="Profile" options={{tabBarIcon: () => (<Ionicons name="ios-person-outline" size={24} color="black" />)}} component={Post}/>
-        </BottomTab.Navigator>
+        {
+          user ? (<BottomStack />) : (<SignStack/>)
+        }
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
