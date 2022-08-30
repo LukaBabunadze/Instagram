@@ -27,7 +27,6 @@ const SignIn = ({navigation}) => {
 
     try {
       await signInWithEmailAndPassword(auth, value.email, value.password);
-      navigation.navigate('Sign In');
     } catch (error) {
       setValue({
         ...value,

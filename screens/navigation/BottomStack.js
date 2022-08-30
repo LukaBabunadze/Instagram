@@ -1,23 +1,24 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Home, Search, Reels, Store, Profile } from '../index'
+import { Search, Reels, Store, Profile } from '../index'
 import { Octicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons'
+import { HomeStack } from './stackNavigators/Stacks'
 
 const BottomTab = createBottomTabNavigator();
 
 const BottomStack = () => {
   return (
-        <BottomTab.Navigator screenOptions={{headerShown: true,  tabBarShowLabel: false, tabBarStyle: {backgroundColor: 'white', elevation: -10} }}>
+        <BottomTab.Navigator screenOptions={{headerShown: false,  tabBarShowLabel: false, tabBarStyle: {backgroundColor: 'white', elevation: -10} }}>
           <BottomTab.Screen 
             name="HomeScreen" 
             options={{tabBarIcon: ({focused}) => (focused ? <MaterialCommunityIcons name="home-variant" size={28} color="black" /> : <Octicons name="home" size={24} color="black" />)}} 
-            component={Home}/>
+            component={HomeStack}/>
           <BottomTab.Screen 
             name="Search" 
             options={{tabBarIcon: ({focused}) => (focused ? <FontAwesome name="search" size={25} color="black" /> : <Octicons name="search" size={24} color="black" />)}} 
