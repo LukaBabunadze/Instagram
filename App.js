@@ -9,12 +9,12 @@ import {
 } from '@expo-google-fonts/inter';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './cofig/firebase';
-import SignUp from './screens/SignScreens/SignUp';
-import SignIn from './screens/SignScreens/SignIn';
 import BottomStack from './screens/navigation/BottomStack';
 import { useAuthentication } from './utils/hooks/useAuthentication';
 import { SignStack } from './screens/navigation/stackNavigators/Stacks';
 import { NavigationContainer } from '@react-navigation/native';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 
 
 export default function App() {
@@ -34,13 +34,15 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        {
-          user ? (<BottomStack />) : (<SignStack/>)
-        }
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          {
+            user ? (<BottomStack />) : (<SignStack/>)
+          }
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
